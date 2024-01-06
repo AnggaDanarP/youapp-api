@@ -1,0 +1,100 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.13.0-rc.3-management
+    hostname: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    env_file:
+      - .env
+
+  auth:
+    build:
+      context: ./
+      dockerfile: apps/auth/DockerFile
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /app/node_modules
+    command: npm run start:dev auth
+
+  chat:
+    build:
+      context: ./
+      dockerfile: apps/chat/DockerFile
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    ports:
+      - '3002:3002'
+    volumes:
+      - .:/usr/src/app
+      - /app/node_modules
+    command: npm run start:dev chat
+
+  gridfs:
+    build:
+      context: ./
+      dockerfile: apps/gridfs/DockerFile
+    env_file:
+      - .env
+    ports:
+      - '3001:3001'
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /app/node_modules
+    command: npm run start:dev gridfs
+
+  user:
+    build:
+      context: ./
+      dockerfile: apps/user/DockerFile
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /app/node_modules
+
+    command: npm run start:dev user
+
+  youapp:
+    build:
+      context: ./
+      dockerfile: apps/youapp/DockerFile
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+    depends_on:
+      - rabbitmq
+      - user
+      - auth
+    volumes:
+      - .:/usr/src/app
+      - /app/node_modules
+    command: npm run start:dev youapp
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - '27017:27017'
+
+  swagger-ui:
+    build:
+      context: ./
+      dockerfile: docs/DockerFile
+    ports:
+      - "8080:8080"
