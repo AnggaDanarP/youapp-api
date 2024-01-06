@@ -68,10 +68,10 @@ services:
 
     command: npm run start:dev user
 
-  youapp:
+  youapp-api:
     build:
       context: ./
-      dockerfile: apps/youapp/DockerFile
+      dockerfile: apps/youapp-api/DockerFile
     env_file:
       - .env
     ports:
@@ -91,10 +91,3 @@ services:
       - ./data/db:/data/db
     ports:
       - '27017:27017'
-
-  swagger-ui:
-    build:
-      context: ./
-      dockerfile: docs/DockerFile
-    ports:
-      - "8080:8080"
