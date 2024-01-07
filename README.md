@@ -1,73 +1,73 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# YOUAPP API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Project Overview
+This project involves creating a full-fledged application with login, profile management, and chat functionalities using Nest.js, MongoDB, and Node.js. The application is containerized using Docker and features JWT authentication, Data Transfer Objects (DTOs), validations, real-time communication using either Socket.io or RabbitMQ, and unit tests.
 
-## Description
+### Key Features:
+- User authentication and profile management
+- Real-time chat functionality
+- JWT token implementation for secure access
+- DTOs and validations for robust data handling
+- Use RabbitMQ for messaging
+- Comprehensive unit testing
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Prerequisites
+- Node.js version 20.10.0
+- npm version 10.2.3
+- Nest.js version 10.2.1
+- Docker and Docker Compose
 
-## Installation
+## Installation and Setup
+1. Clone the repository.
+2. Install all dependencies using npm:
+   ```bash
+   npm install
+   ```
+3. Start the application using Docker Compose:
+   ```bash
+   docker-compose up
+   ```
 
-```bash
-$ npm install
-```
+## API Documentation
+The API endpoints are as follows:
 
-## Running the app
+### `/api/register`
+- **Method**: POST
+- **Body**: CreateUserDto (username, email, password)
+- **Response**: 201 (User Registered)
 
-```bash
-# development
-$ npm run start
+### `/api/login`
+- **Method**: POST
+- **Body**: LoginUserDto
+- **Response**: 201 (User Logged In)
 
-# watch mode
-$ npm run start:dev
+### `/api/getProfile`
+- **Method**: GET
+- **Response**: 200 (Profile Data)
 
-# production mode
-$ npm run start:prod
-```
+### `/api/updateProfile`
+- **Method**: PUT
+- **Body**: UpdateProfileDto
+- **Response**: 200 (Profile Updated)
 
-## Test
+### `/api/askHoroscopeZodiac`
+- **Method**: POST
+- **Response**: 201 (Horoscope/Zodiac Information)
 
-```bash
-# unit tests
-$ npm run test
+### `/api/profiles`
+- **Method**: GET
+- **Response**: 200 (List of Profiles)
 
-# e2e tests
-$ npm run test:e2e
+### `/api/refresh`
+- **Method**: GET
+- **Response**: 200 (Token Refreshed)
 
-# test coverage
-$ npm run test:cov
-```
+## DTO Schemas
+- **CreateUserDto**: `{ username: string, email: string, password: string }`
+- **LoginUserDto**: `{ /* properties here */ }`
+- **UpdateProfileDto**: `{ /* properties here */ }`
 
-## Support
+## CRUD Features
+Implement CRUD operations showcasing your understanding of object-oriented programming, data structures, schema planning, and microservices in a NoSQL environment.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
